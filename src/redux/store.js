@@ -6,8 +6,6 @@ import usersReducer from './usersReducer';
 import authReducer from './authReducer';
 import appReducer from './appReducer';
 
-// переименовать в стор просто
-
 const reducers = combineReducers({
   profilePage: profileReducer,
   dialogPage: dialogReducer,
