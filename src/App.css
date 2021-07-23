@@ -15,9 +15,6 @@
   border: solid 1px var(--border);
   border-radius: 4px;
   padding: 8px;
-
-  /* в новой версии не необходимо
-  box-sizing: border-box; */
 }
 
 button {
@@ -51,8 +48,6 @@ textarea {
 }
 
 textarea {
-  /* вроде ничего не сломалось */
-  /* height: 100%; */
   font-weight: normal;
   resize: none;
 }
