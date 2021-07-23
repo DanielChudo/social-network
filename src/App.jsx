@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Redirect } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Loader, NavBar } from './components';
-import './App.css';
 import { AuthPage, DialogsPage, ProfilePage, UsersPage } from './pages';
+import { Loader, NavBar } from './components';
 import { requestAuthUserData } from './redux/authReducer';
+import './App.css';
 
 function App() {
   const [ready, setReady] = useState(false);

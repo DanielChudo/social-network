@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import UsersPage from './UsersPage';
+import { useParams } from 'react-router-dom';
 import { follow, unfollow, requestUsers } from '../../redux/usersReducer';
+import UsersPage from './UsersPage';
 
 function UsersContainer() {
   const { users, pageSize, totalUsers, isFetching, followingInProgress } =
