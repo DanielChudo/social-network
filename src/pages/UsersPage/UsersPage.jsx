@@ -1,8 +1,6 @@
 import React from 'react';
-import User from './User/User';
-import Preloader from '../Preloader/Preloader';
-import './Users.css';
-import Paginator from './Paginator';
+import { User, Paginator, Loader } from '../../components';
+import './UsersPage.css';
 
 function Users(props) {
   const {
@@ -31,9 +29,9 @@ function Users(props) {
 
   return (
     <div id="users">
-      {/* TODO: заменить на isFetching && <Preloader /> все конструкции. 
+      {/* TODO: заменить на isFetching && <Loader /> все конструкции. 
       Также просто надо пониже опустить, а не ставить z-index=1 */}
-      {isFetching ? <Preloader /> : null}
+      {isFetching ? <Loader /> : null}
       {/* TODO: заменить undefined на '' */}
       <div className={`wrapper ${isFetching ? 'isFetching' : undefined}`}>
         {users}

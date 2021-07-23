@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import Users from './Users';
+import UsersPage from './UsersPage';
 import { follow, unfollow, requestUsers } from '../../redux/usersReducer';
 
 function UsersContainer() {
@@ -20,7 +20,7 @@ function UsersContainer() {
   }, [curPage]);
 
   return (
-    <Users
+    <UsersPage
       users={users}
       curPage={curPage}
       totalUsers={totalUsers}

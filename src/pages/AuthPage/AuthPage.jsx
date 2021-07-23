@@ -3,9 +3,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import './Login.css';
-import LoginErrorMessage from './LoginErrorMessage';
+import ErrorMessage from './ErrorMessage';
 import { login } from '../../redux/authReducer';
+import './AuthPage.css';
 
 const initialValues = {
   login: '',
@@ -53,7 +53,7 @@ function LoginForm(props) {
               </div>
             )}
             <Form id="login__form" className="wrapper">
-              <LoginErrorMessage error={touched.login && errors.login} />
+              <ErrorMessage error={touched.login && errors.login} />
               <Field
                 name="login"
                 type="text"
@@ -63,7 +63,7 @@ function LoginForm(props) {
                 }
               />
 
-              <LoginErrorMessage error={touched.password && errors.password} />
+              <ErrorMessage error={touched.password && errors.password} />
               <Field
                 name="password"
                 type="password"
@@ -77,9 +77,7 @@ function LoginForm(props) {
 
               {captchaURL && (
                 <>
-                  <LoginErrorMessage
-                    error={touched.captcha && errors.captcha}
-                  />
+                  <ErrorMessage error={touched.captcha && errors.captcha} />
                   <Field
                     name="captcha"
                     type="text"

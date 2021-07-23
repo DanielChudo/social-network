@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/authReducer';
-import './Menu.css';
+import './NavBar.css';
 
 function Menu() {
   const id = useSelector((state) => state.auth.id);

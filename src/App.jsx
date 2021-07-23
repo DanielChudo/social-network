@@ -3,13 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from './redux/appReducer';
-import Menu from './components/Menu/Menu';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import Dialogs from './components/Dialogs/Dialogs';
-import UsersContainer from './components/Users/UsersContainer';
-import Preloader from './components/Preloader/Preloader';
-import Login from './components/Login/Login';
+import { Loader, NavBar } from './components';
 import './App.css';
+import { AuthPage, DialogsPage, ProfilePage, UsersPage } from './pages';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,32 +17,32 @@ function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const initialized = useSelector((state) => state.app.initialized);
   if (!initialized) {
-    return <Preloader />;
+    return <Loader />;
   }
 
   return (
     <>
-      {isAuth && <Menu />}
+      {isAuth && <NavBar />}
       <div style={{ padding: '8px' }}>
         {isAuth ? (
           <Switch>
             <Route exact path="/profile/:userId">
-              <ProfileContainer />
+              <ProfilePage />
             </Route>
             <Route exact path="/dialogs/:userId">
-              <Dialogs />
+              <DialogsPage />
             </Route>
             <Route exact path="/users/:page">
-              <UsersContainer />
+              <UsersPage />
             </Route>
             <Redirect to={`/profile/${id}`} />
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/login">
-              <Login />
+            <Route exact path="/auth">
+              <AuthPage />
             </Route>
-            <Redirect to="/login" />
+            <Redirect to="/auth" />
           </Switch>
         )}
       </div>

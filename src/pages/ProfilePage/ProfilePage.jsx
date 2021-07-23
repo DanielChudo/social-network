@@ -2,11 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import autosize from 'autosize';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import Post from './Post/Post';
-import ProfileStatus from './ProfileStatus/ProfileStatus';
-import UploadAvatarButton from './UploadAvatarButton/UploadAvatarButton';
 import defaultAvatar from '../../images/defaultAvatar.png';
-import './Profile.css';
+import { Post, UploadAvatarButton, ProfileStatus } from '../../components';
+import './ProfilePage.css';
 
 function Profile(props) {
   const postTextRef = useRef(null);
