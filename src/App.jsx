@@ -17,6 +17,8 @@ function App() {
     dispatch(initializeApp());
   }, [dispatch]);
 
+  const id = useSelector((state) => state.auth.id);
+  const isAuth = useSelector((state) => state.auth.isAuth);
   const initialized = useSelector((state) => state.app.initialized);
   if (!initialized) {
     return <Preloader />;
@@ -24,25 +26,29 @@ function App() {
 
   return (
     <>
-      <Menu />
+      {isAuth && <Menu />}
       <div style={{ padding: '8px' }}>
-        <Switch>
-          <Route path="/profile/:userId?">
-            <ProfileContainer />
-          </Route>
-          <Route path="/dialogs">
-            <Dialogs />
-          </Route>
-          <Route path="/users/:page">
-            <UsersContainer />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/login" />;
-          </Route>
-        </Switch>
+        {isAuth ? (
+          <Switch>
+            <Route exact path="/profile/:userId">
+              <ProfileContainer />
+            </Route>
+            <Route exact path="/dialogs/:userId">
+              <Dialogs />
+            </Route>
+            <Route exact path="/users/:page">
+              <UsersContainer />
+            </Route>
+            <Redirect to={`/profile/${id}`} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Redirect to="/login" />
+          </Switch>
+        )}
       </div>
     </>
   );

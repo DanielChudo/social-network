@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import './Login.css';
-import { Redirect } from 'react-router';
 import LoginErrorMessage from './LoginErrorMessage';
 import { login } from '../../redux/authReducer';
 
@@ -121,11 +120,6 @@ function Login() {
     dispatch(login(loginValue, password, rememberMe, captcha, setStatus));
     setFieldValue('captcha', '');
   };
-
-  const { isAuth, id } = useSelector((state) => state.auth);
-  if (isAuth) {
-    return <Redirect to={`/profile/${id}`} />;
-  }
 
   document.title = 'Вход';
   return <LoginForm onSubmit={onSubmit} />;

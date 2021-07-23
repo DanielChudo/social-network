@@ -6,7 +6,6 @@ import autosize from 'autosize';
 import { sendMessage } from '../../redux/dialogReducer';
 import Dialog from './Dialog/Dialog';
 import Message from './Message/Message';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
 import './Dialogs.css';
 
 function Dialogs() {
@@ -88,4 +87,4 @@ function SendMessageForm(props) {
   );
 }
 
-export default withAuthRedirect(Dialogs);
+export default Dialogs;

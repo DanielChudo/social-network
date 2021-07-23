@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
 import Preloader from '../Preloader/Preloader';
 import Profile from './Profile';
 import {
@@ -46,4 +45,4 @@ function ProfileContainer() {
   );
 }
 
-export default withAuthRedirect(ProfileContainer);
+export default ProfileContainer;
