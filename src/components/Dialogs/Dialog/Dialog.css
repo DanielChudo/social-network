@@ -1,0 +1,18 @@
+.dialogs__user {
+  display: block;
+  color: black;
+  font-weight: bold;
+  padding: 20px 10px;
+  border-bottom: solid 1px var(--border);
+  text-decoration: none;
+}
+
+.dialogs__user:hover {
+  background-color: var(--item-hover);
+}
+
+.dialogs__user_active,
+.dialogs__user_active:hover {
+  background-color: var(--main);
+  color: white;
+}

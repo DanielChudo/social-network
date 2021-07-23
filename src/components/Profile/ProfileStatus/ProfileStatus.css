@@ -1,0 +1,13 @@
+#profile__status-change {
+  position: absolute;
+  /* Окно изменения статуса будто обволкаивает текст статуса */
+  top: -17.5px;
+  left: -17.5px;
+  width: 384px;
+  background-color: var(--item-hover);
+}
+
+#profile__status-change > input {
+  margin-bottom: 8px;
+  font-weight: normal;
+}

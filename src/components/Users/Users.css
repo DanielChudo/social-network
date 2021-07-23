@@ -1,0 +1,34 @@
+#users {
+  position: relative;
+}
+
+#users > div.isFetching::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+#users > div {
+  padding-top: 0;
+}
+
+#users__select-pages {
+  margin-top: 16px;
+  /* у родителя padding-bottom 8px уже */
+  margin-bottom: 8px;
+}
+
+.users__set-page {
+  margin-right: 12px;
+  color: var(--main);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.users__set-page_active {
+  font-weight: 800;
+}

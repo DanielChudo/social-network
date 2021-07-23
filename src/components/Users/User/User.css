@@ -1,0 +1,99 @@
+.user {
+  padding: 20px 10px;
+  border-bottom: solid 1px var(--border);
+  display: flex;
+}
+
+.user > a:first-child {
+  height: 80px;
+  width: 80px;
+}
+
+.user > a > img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.user__info {
+  flex-grow: 1;
+  margin-left: 16px;
+  padding-top: 8px;
+}
+
+.user__info > span {
+  margin-bottom: 8px;
+}
+
+.user__info > a {
+  display: block;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 8px;
+}
+
+.user__status {
+  border-bottom: 3px dashed var(--main);
+  display: inline-block;
+}
+
+.user > button {
+  align-self: center;
+}
+
+button.isFetching {
+  color: var(--main);
+}
+
+button.isFetching:hover {
+  color: var(--main-bright);
+}
+
+button.isFetching::after {
+  content: '';
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: 1.5s linear infinite rotate;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.user__button-unfollow {
+  background-color: var(--main-super-bright);
+  color: var(--main);
+}
+
+.user__button-unfollow:hover {
+  background-color: var(--background);
+}
+
+.user__button-unfollow:active {
+  background-color: var(--main-super-bright);
+}
+
+.user__button-unfollow.isFetching {
+  color: var(--main-super-bright);
+}
+
+.user__button-unfollow.isFetching:hover {
+  color: var(--background);
+}
+
+.user__button-unfollow.isFetching::after {
+  color: var(--main);
+}

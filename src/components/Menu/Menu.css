@@ -1,0 +1,17 @@
+#menu {
+  height: 48px;
+  background-color: var(--main);
+  display: flex;
+}
+
+.menu__item {
+  line-height: 48px;
+  color: white;
+  padding: 0px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu__item:hover {
+  background-color: var(--main-hover);
+}

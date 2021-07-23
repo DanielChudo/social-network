@@ -1,0 +1,14 @@
+.post {
+  margin: 8px 0px 0px 0px;
+}
+
+.post p {
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.date {
+  color: var(--main);
+  font-size: 10pt;
+  text-align: right;
+}
