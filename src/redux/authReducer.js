@@ -4,11 +4,11 @@ const SET_USER_DATA = 'SET_USER_DATA';
 const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL';
 
 const initialState = {
-  id: null,
-  email: null,
-  login: null,
+  id: 0,
+  email: '',
+  login: '',
   isAuth: false,
-  captchaURL: null,
+  captchaURL: '',
 };
 
 function authReducer(state = initialState, action) {
@@ -45,11 +45,14 @@ export function setCaptchaURL(captchaURL) {
   };
 }
 
-export const setAuthUserData = () => async (dispatch) => {
-  const response = await authAPI.setAuthUserData();
+export const requestAuthUserData = (setReady) => async (dispatch) => {
+  const response = await authAPI.requestAuthUserData();
   if (response.resultCode === 0) {
     const { id, email, login } = response.data;
     dispatch(setUserData(id, email, login, true));
+  }
+  if (setReady) {
+    setReady(true);
   }
 };
 
@@ -62,7 +65,7 @@ export const login =
   (email, password, rememberMe, captcha, setStatus) => async (dispatch) => {
     const response = await authAPI.login(email, password, rememberMe, captcha);
     if (response.resultCode === 0) {
-      dispatch(setAuthUserData());
+      dispatch(requestAuthUserData());
     } else {
       if (response.resultCode === 10) {
         dispatch(getCaptchaUrl());

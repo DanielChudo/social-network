@@ -1,48 +1,50 @@
-import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Redirect } from 'react-router';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { initializeApp } from './redux/appReducer';
-import Menu from './components/Menu/Menu';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import Dialogs from './components/Dialogs/Dialogs';
-import UsersContainer from './components/Users/UsersContainer';
-import Preloader from './components/Preloader/Preloader';
-import Login from './components/Login/Login';
+import { AuthPage, DialogsPage, ProfilePage, UsersPage } from './pages';
+import { Loader, NavBar } from './components';
+import { requestAuthUserData } from './redux/authReducer';
 import './App.css';
 
 function App() {
+  const [ready, setReady] = useState(false);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(initializeApp());
+  useEffect(async () => {
+    dispatch(requestAuthUserData(setReady));
   }, [dispatch]);
 
-  const initialized = useSelector((state) => state.app.initialized);
-  if (!initialized) {
-    return <Preloader />;
+  const id = useSelector((state) => state.auth.id);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
+  if (!ready) {
+    return <Loader />;
   }
 
   return (
     <>
-      <Menu />
+      {isAuth && <NavBar />}
       <div style={{ padding: '8px' }}>
-        <Switch>
-          <Route path="/profile/:userId?">
-            <ProfileContainer />
-          </Route>
-          <Route path="/dialogs">
-            <Dialogs />
-          </Route>
-          <Route path="/users/:page">
-            <UsersContainer />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/login" />;
-          </Route>
-        </Switch>
+        {isAuth ? (
+          <Switch>
+            <Route exact path="/profile/:userId">
+              <ProfilePage />
+            </Route>
+            <Route exact path="/dialogs/:userId">
+              <DialogsPage />
+            </Route>
+            <Route exact path="/users/:page">
+              <UsersPage />
+            </Route>
+            <Redirect to={`/profile/${id}`} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/auth">
+              <AuthPage />
+            </Route>
+            <Redirect to="/auth" />
+          </Switch>
+        )}
       </div>
     </>
   );

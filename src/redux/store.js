@@ -4,16 +4,12 @@ import profileReducer from './profileReducer';
 import dialogReducer from './dialogReducer';
 import usersReducer from './usersReducer';
 import authReducer from './authReducer';
-import appReducer from './appReducer';
-
-// переименовать в стор просто
 
 const reducers = combineReducers({
   profilePage: profileReducer,
   dialogPage: dialogReducer,
   usersPage: usersReducer,
   auth: authReducer,
-  app: appReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

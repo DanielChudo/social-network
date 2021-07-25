@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
-import Users from './Users';
+import { useParams } from 'react-router-dom';
 import { follow, unfollow, requestUsers } from '../../redux/usersReducer';
+import UsersPage from './UsersPage';
 
 function UsersContainer() {
   const { users, pageSize, totalUsers, isFetching, followingInProgress } =
@@ -21,7 +20,7 @@ function UsersContainer() {
   }, [curPage]);
 
   return (
-    <Users
+    <UsersPage
       users={users}
       curPage={curPage}
       totalUsers={totalUsers}
@@ -34,4 +33,4 @@ function UsersContainer() {
   );
 }
 
-export default withAuthRedirect(UsersContainer);
+export default UsersContainer;

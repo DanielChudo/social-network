@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import autosize from 'autosize';
+import { Dialog, Message } from '../../components';
 import { sendMessage } from '../../redux/dialogReducer';
-import Dialog from './Dialog/Dialog';
-import Message from './Message/Message';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
-import './Dialogs.css';
+import './DialogsPage.css';
 
 function Dialogs() {
   const messageTextRef = useRef(null);
@@ -88,4 +86,4 @@ function SendMessageForm(props) {
   );
 }
 
-export default withAuthRedirect(Dialogs);
+export default Dialogs;

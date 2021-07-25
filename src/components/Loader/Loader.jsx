@@ -1,7 +1,7 @@
 import React from 'react';
-import './Preloader.css';
+import './Loader.css';
 
-function Preloader() {
+function Loader() {
   return (
     <div className="lds-ellipsis">
       <div />
@@ -12,4 +12,4 @@ function Preloader() {
   );
 }
 
-export default Preloader;
+export default Loader;

@@ -49,7 +49,7 @@ export const profileAPI = {
 };
 
 export const authAPI = {
-  setAuthUserData: () =>
+  requestAuthUserData: () =>
     instance.get('/auth/me').then((response) => response.data),
   login: (email, password, rememberMe, captcha) =>
     instance

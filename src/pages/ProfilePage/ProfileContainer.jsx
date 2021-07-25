@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
-import Preloader from '../Preloader/Preloader';
-import Profile from './Profile';
+import { Loader } from '../../components';
+import ProfilePage from './ProfilePage';
 import {
   addPost,
   getProfileData,
@@ -30,10 +29,12 @@ function ProfileContainer() {
     };
   }, [userId]);
 
-  return !profile ? (
-    <Preloader />
-  ) : (
-    <Profile
+  if (!profile) {
+    return <Loader />;
+  }
+
+  return (
+    <ProfilePage
       // если сравнивать с userId из url, то будет мерцание
       isOwner={id === profile.userId}
       posts={posts}
@@ -46,4 +47,4 @@ function ProfileContainer() {
   );
 }
 
-export default withAuthRedirect(ProfileContainer);
+export default ProfileContainer;
