@@ -7,7 +7,7 @@ import { Dialog, Message } from '../../components';
 import { sendMessage } from '../../redux/dialogReducer';
 import './DialogsPage.css';
 
-function Dialogs() {
+function DialogsPage() {
   const messageTextRef = useRef(null);
   useEffect(() => {
     document.title = 'Сообщения';
@@ -86,4 +86,4 @@ function SendMessageForm(props) {
   );
 }
 
-export default Dialogs;
+export default DialogsPage;

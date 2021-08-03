@@ -6,7 +6,7 @@ import defaultAvatar from '../../images/defaultAvatar.png';
 import { Post, UploadAvatarButton, ProfileStatus } from '../../components';
 import './ProfilePage.css';
 
-function Profile(props) {
+function ProfilePage(props) {
   const postTextRef = useRef(null);
   useEffect(() => {
     autosize(postTextRef.current);
@@ -93,4 +93,4 @@ function AddPostForm(props) {
   );
 }
 
-export default Profile;
+export default ProfilePage;

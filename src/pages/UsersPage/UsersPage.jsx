@@ -2,7 +2,7 @@ import React from 'react';
 import { User, Paginator, Loader } from '../../components';
 import './UsersPage.css';
 
-function Users(props) {
+function UsersPage(props) {
   const {
     curPage,
     totalUsers,
@@ -45,4 +45,4 @@ function Users(props) {
   );
 }
 
-export default Users;
+export default UsersPage;

@@ -43,7 +43,6 @@ function AuthPage() {
     const { login: loginValue, password, rememberMe, captcha } = values;
     dispatch(login(loginValue, password, rememberMe, captcha, setStatus));
   };
-  // const errorAnimation = useState(false);
   const captchaURL = useSelector((state) => state.auth.captchaURL);
 
   return (
@@ -54,7 +53,6 @@ function AuthPage() {
     >
       {({ values, touched, errors, status }) => {
         values.isCaptchaExist = !!captchaURL;
-        console.log('ff');
         return (
           <div id="login">
             {status && (
