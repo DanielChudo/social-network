@@ -7,3 +7,4 @@ export { default as ProfileStatus } from './ProfileStatus/ProfileStatus';
 export { default as UploadAvatarButton } from './UploadAvatarButton/UploadAvatarButton';
 export { default as User } from './User/User';
 export { default as Paginator } from './Paginator';
+export { default as ErrorMessage } from './ErrorMessage';

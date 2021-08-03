@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import ErrorMessage from './ErrorMessage';
 import { login } from '../../redux/authReducer';
+import { ErrorMessage } from '../../components';
 import './AuthPage.css';
 
 const initialValues = {
   login: '',
   password: '',
   rememberMe: false,
-  isCaptcha: false,
+  isCaptchaExist: false,
   captcha: '',
 };
 
@@ -27,24 +27,34 @@ const validationSchema = Yup.object({
   rememberMe: Yup.boolean(),
   captcha: Yup.string()
     .trim()
-    .when('isCaptcha', {
+    .when('isCaptchaExist', {
       is: true,
       then: Yup.string().required('Введите каптчу'),
     }),
 });
 
-function LoginForm(props) {
-  const { onSubmit } = props;
+function AuthPage() {
+  useEffect(() => {
+    document.title = 'Авторизация';
+  }, []);
+
+  const dispatch = useDispatch();
+  const handleSubmit = (values, { setStatus }) => {
+    const { login: loginValue, password, rememberMe, captcha } = values;
+    dispatch(login(loginValue, password, rememberMe, captcha, setStatus));
+  };
+  // const errorAnimation = useState(false);
   const captchaURL = useSelector((state) => state.auth.captchaURL);
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       {({ values, touched, errors, status }) => {
-        values.isCaptcha = !!captchaURL;
+        values.isCaptchaExist = !!captchaURL;
+        console.log('ff');
         return (
           <div id="login">
             {status && (
@@ -110,17 +120,4 @@ function LoginForm(props) {
   );
 }
 
-function Login() {
-  const dispatch = useDispatch();
-
-  const onSubmit = (values, { setStatus, setFieldValue }) => {
-    const { login: loginValue, password, rememberMe, captcha } = values;
-    dispatch(login(loginValue, password, rememberMe, captcha, setStatus));
-    setFieldValue('captcha', '');
-  };
-
-  document.title = 'Вход';
-  return <LoginForm onSubmit={onSubmit} />;
-}
-
-export default Login;
+export default AuthPage;
