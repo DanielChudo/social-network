@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { follow, unfollow, requestUsers } from '../../redux/usersReducer';
 import UsersPage from './UsersPage';
 
 function UsersContainer() {
+  // разбить на селекторы
   const { users, pageSize, totalUsers, isFetching, followingInProgress } =
     useSelector((state) => state.usersPage);
   let { page: curPage } = useParams();
@@ -16,8 +17,15 @@ function UsersContainer() {
   }, []);
 
   useEffect(() => {
-    dispatch(requestUsers(curPage, pageSize, totalUsers));
+    if (curPage) {
+      dispatch(requestUsers(curPage, pageSize, totalUsers));
+    }
   }, [curPage]);
+
+  // если NaN, например users/24lol
+  if (!curPage) {
+    return <Redirect to="/users/1" />;
+  }
 
   return (
     <UsersPage
