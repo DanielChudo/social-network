@@ -30,7 +30,7 @@ function User(props) {
           type="button"
           disabled={followingInProgressTrigger}
           className={`user__button-unfollow ${
-            followingInProgressTrigger ? 'isFetching' : undefined
+            followingInProgressTrigger ? 'isFetching' : ''
           }`}
           onClick={() => {
             unfollow(id);
@@ -42,7 +42,7 @@ function User(props) {
         <button
           type="button"
           disabled={followingInProgressTrigger}
-          className={followingInProgressTrigger ? 'isFetching' : undefined}
+          className={followingInProgressTrigger ? 'isFetching' : null}
           onClick={() => {
             follow(id);
           }}

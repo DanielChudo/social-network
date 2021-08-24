@@ -36,8 +36,7 @@ function UsersPage() {
       {/* TODO: заменить на isFetching && <Loader /> все конструкции. 
       Также просто надо пониже опустить, а не ставить z-index=1 */}
       {isFetching ? <Loader /> : null}
-      {/* TODO: заменить undefined на '' */}
-      <div className={`wrapper ${isFetching ? 'isFetching' : undefined}`}>
+      <div className={`wrapper ${isFetching ? 'isFetching' : ''}`}>
         {users.map((user) => (
           <User
             key={user.id}
