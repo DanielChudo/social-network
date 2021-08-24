@@ -7,49 +7,44 @@ import { login } from '../../redux/authReducer';
 import { ErrorMessage } from '../../components';
 import './AuthPage.css';
 
-const initialValues = {
-  login: '',
-  password: '',
-  rememberMe: false,
-  isCaptchaExist: false,
-  captcha: '',
-};
-
-const validationSchema = Yup.object({
-  login: Yup.string()
-    .trim()
-    .email('Не подходит под шаблон почты')
-    .required('Введите почту'),
-  password: Yup.string()
-    .trim()
-    .min(6, 'Слишком короткий пароль')
-    .required('Введите пароль'),
-  rememberMe: Yup.boolean(),
-  captcha: Yup.string()
-    .trim()
-    .when('isCaptchaExist', {
-      is: true,
-      then: Yup.string().required('Введите каптчу'),
-    }),
-});
-
 function AuthPage() {
   useEffect(() => {
     document.title = 'Авторизация';
   }, []);
 
   const dispatch = useDispatch();
-  const handleSubmit = (values, { setStatus }) => {
-    const { login: loginValue, password, rememberMe, captcha } = values;
-    dispatch(login(loginValue, password, rememberMe, captcha, setStatus));
-  };
   const captchaURL = useSelector((state) => state.auth.captchaURL);
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      initialValues={{
+        login: '',
+        password: '',
+        rememberMe: false,
+        isCaptchaExist: false,
+        captcha: '',
+      }}
+      validationSchema={Yup.object({
+        login: Yup.string()
+          .trim()
+          .email('Не подходит под шаблон почты')
+          .required('Введите почту'),
+        password: Yup.string()
+          .trim()
+          .min(6, 'Слишком короткий пароль')
+          .required('Введите пароль'),
+        rememberMe: Yup.boolean(),
+        captcha: Yup.string()
+          .trim()
+          .when('isCaptchaExist', {
+            is: true,
+            then: Yup.string().required('Введите каптчу'),
+          }),
+      })}
+      onSubmit={(values, { setStatus }) => {
+        const { login: loginValue, password, rememberMe, captcha } = values;
+        dispatch(login(loginValue, password, rememberMe, captcha, setStatus));
+      }}
     >
       {({ values, touched, errors, status }) => {
         values.isCaptchaExist = !!captchaURL;
