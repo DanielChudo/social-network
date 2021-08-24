@@ -2,22 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import './ProfileStatus.css';
 
-function ProfileStatus(props) {
-  const { status: propsStatus, isOwner } = props;
-
+function ProfileStatus({ status: propsStatus, isOwner, updateStatus }) {
   const [editMode, setEditMode] = useState(false);
   const [status, setStatus] = useState(propsStatus);
 
   useEffect(() => {
     setStatus(propsStatus);
   }, [propsStatus]);
-
-  const updateStatus = (e) => {
-    props.updateStatus(status);
-    // без этого onBlur инпута не сработает
-    e.target[1].focus();
-    e.preventDefault();
-  };
 
   return (
     <div style={{ position: 'relative' }}>
@@ -34,7 +25,12 @@ function ProfileStatus(props) {
         <form
           id="profile__status-change"
           className="wrapper"
-          onSubmit={updateStatus}
+          onSubmit={(e) => {
+            updateStatus(status);
+            // без этого onBlur инпута не сработает
+            e.target[1].focus();
+            e.preventDefault();
+          }}
         >
           <input
             autoFocus="true"

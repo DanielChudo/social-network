@@ -2,9 +2,7 @@ import React from 'react';
 import defaultAvatar from '../../images/defaultAvatar.png';
 import './Message.css';
 
-function Message(props) {
-  const { text } = props;
-
+function Message({ text }) {
   return (
     <div className="message">
       <img className="message__avatar" src={defaultAvatar} alt="user avatar" />

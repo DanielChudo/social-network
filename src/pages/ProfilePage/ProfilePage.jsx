@@ -92,8 +92,7 @@ function ProfilePage() {
   );
 }
 
-function AddPostForm(props) {
-  const { postTextRef } = props;
+function AddPostForm({ postTextRef }) {
   const dispatch = useDispatch();
 
   return (

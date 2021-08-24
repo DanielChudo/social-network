@@ -2,9 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Dialog.css';
 
-function Dialog(props) {
-  const { id, name, surname, emoji } = props;
-
+function Dialog({ id, name, surname, emoji }) {
   return (
     <NavLink
       to={`/dialogs/${id}`}

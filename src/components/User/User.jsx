@@ -3,17 +3,16 @@ import { NavLink } from 'react-router-dom';
 import defaultAvatar from '../../images/defaultAvatar.png';
 import './User.css';
 
-function User(props) {
-  const {
-    id,
-    avatar,
-    name,
-    status,
-    followed,
-    followingInProgress,
-    follow,
-    unfollow,
-  } = props;
+function User({
+  id,
+  avatar,
+  name,
+  status,
+  followed,
+  followingInProgress,
+  follow,
+  unfollow,
+}) {
   const followingInProgressTrigger = followingInProgress.includes(id);
 
   return (

@@ -1,9 +1,7 @@
 import React from 'react';
 import './Post.css';
 
-function Post(props) {
-  const { title, text } = props;
-
+function Post({ title, text }) {
   return (
     <div className="post wrapper">
       <p>

@@ -2,13 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import './UploadAvatarButton.css';
 
-function UploadAvatarButton(props) {
-  const uploadAvatar = (e) => {
-    if (e.target.files.length) {
-      props.uploadAvatar(e.target.files[0]);
-    }
-  };
-
+function UploadAvatarButton({ uploadAvatar }) {
   const uploadAvatarPercent = useSelector(
     (state) => state.profilePage.uploadAvatarPercent
   );
@@ -22,7 +16,11 @@ function UploadAvatarButton(props) {
         type="file"
         id="uploadAvatar__button"
         disabled={uploadAvatarPercent}
-        onChange={uploadAvatar}
+        onChange={(e) => {
+          if (e.target.files.length) {
+            uploadAvatar(e.target.files[0]);
+          }
+        }}
       />
     </>
   );
