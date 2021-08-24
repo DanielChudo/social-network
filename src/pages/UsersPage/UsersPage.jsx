@@ -33,9 +33,6 @@ function UsersPage() {
 
   return (
     <div id="users">
-      {/* TODO: заменить на isFetching && <Loader /> все конструкции. 
-      Также просто надо пониже опустить, а не ставить z-index=1 */}
-      {isFetching ? <Loader /> : null}
       <div className={`wrapper ${isFetching ? 'isFetching' : ''}`}>
         {users.map((user) => (
           <User
@@ -56,6 +53,7 @@ function UsersPage() {
           pageSize={pageSize}
         />
       </div>
+      {isFetching && <Loader />}
     </div>
   );
 }
