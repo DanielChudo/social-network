@@ -1,41 +1,72 @@
 import React, { useEffect, useRef } from 'react';
-import autosize from 'autosize';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import autosize from 'autosize';
 import * as Yup from 'yup';
 import defaultAvatar from '../../images/defaultAvatar.png';
-import { Post, UploadAvatarButton, ProfileStatus } from '../../components';
+import {
+  Post,
+  UploadAvatarButton,
+  ProfileStatus,
+  Loader,
+} from '../../components';
+import {
+  addPost,
+  getProfileData,
+  getStatus,
+  setProfileData,
+  updateStatus,
+  uploadAvatar,
+} from '../../redux/profileReducer';
 import './ProfilePage.css';
 
-function ProfilePage(props) {
+function ProfilePage() {
+  const profile = useSelector((state) => state.profilePage.profile);
+  const posts = useSelector((state) => state.profilePage.posts);
+  const status = useSelector((state) => state.profilePage.status);
+
   const postTextRef = useRef(null);
   useEffect(() => {
     autosize(postTextRef.current);
   }, []);
 
-  const addPost = (values, { resetForm }) => {
-    props.addPost(values.titleText.trim(), values.postText.trim());
-    resetForm();
-    autosize.update(postTextRef.current);
-  };
+  const id = useSelector((state) => state.auth.id);
+  let { userId } = useParams();
+  userId = Number(userId);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProfileData(userId));
+    dispatch(getStatus(userId));
 
-  let { posts } = props;
-  posts = posts.map((post) => (
-    <Post key={post.id} title={post.title} text={post.text} />
-  ));
+    return () => {
+      // чтобы не мерцал профиль
+      dispatch(setProfileData(null));
+    };
+  }, [userId]);
 
-  const { profile, status, updateStatus, isOwner, uploadAvatar } = props;
+  if (!profile) {
+    return <Loader />;
+  }
+
+  const isOwner = id === profile.userId;
+
   return (
     <div id="profile">
       <div id="avatar">
         <img src={profile.photos.large || defaultAvatar} alt="user avatar" />
-        {isOwner && <UploadAvatarButton uploadAvatar={uploadAvatar} />}
+        {isOwner && (
+          <UploadAvatarButton
+            uploadAvatar={(avatar) => dispatch(uploadAvatar(avatar))}
+          />
+        )}
       </div>
       <div id="profile__page">
         <div id="profile__page-bio">
           <p style={{ fontSize: '20pt' }}>{profile.fullName}</p>
           <ProfileStatus
             status={status}
-            updateStatus={updateStatus}
+            updateStatus={(statusText) => dispatch(updateStatus(statusText))}
             isOwner={isOwner}
           />
           <ul>
@@ -50,30 +81,36 @@ function ProfilePage(props) {
             </li>
           </ul>
         </div>
-        <AddPostForm postTextRef={postTextRef} addPost={addPost} />
-        <div id="posts">{posts}</div>
+        {isOwner && <AddPostForm postTextRef={postTextRef} />}
+        <div id="posts">
+          {posts.map((post) => (
+            <Post key={post.id} title={post.title} text={post.text} />
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 function AddPostForm(props) {
-  const { postTextRef, addPost } = props;
-
-  const initialValues = {
-    titleText: '',
-    postText: '',
-  };
-  const validationSchema = Yup.object({
-    titleText: Yup.string().trim().required(),
-    postText: Yup.string().trim().required(),
-  });
+  const { postTextRef } = props;
+  const dispatch = useDispatch();
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={addPost}
+      initialValues={{
+        titleText: '',
+        postText: '',
+      }}
+      validationSchema={Yup.object({
+        titleText: Yup.string().trim().required(),
+        postText: Yup.string().trim().required(),
+      })}
+      onSubmit={(values, { resetForm }) => {
+        dispatch(addPost(values.titleText.trim(), values.postText.trim()));
+        resetForm();
+        autosize.update(postTextRef.current);
+      }}
     >
       <Form>
         <div id="profile__page-post-text" className="wrapper">
