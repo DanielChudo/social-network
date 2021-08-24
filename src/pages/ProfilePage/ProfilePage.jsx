@@ -22,10 +22,6 @@ import {
 import './ProfilePage.css';
 
 function ProfilePage() {
-  const profile = useSelector((state) => state.profilePage.profile);
-  const posts = useSelector((state) => state.profilePage.posts);
-  const status = useSelector((state) => state.profilePage.status);
-
   const postTextRef = useRef(null);
   useEffect(() => {
     autosize(postTextRef.current);
@@ -44,6 +40,10 @@ function ProfilePage() {
       dispatch(setProfileData(null));
     };
   }, [userId]);
+
+  const profile = useSelector((state) => state.profilePage.profile);
+  const posts = useSelector((state) => state.profilePage.posts);
+  const status = useSelector((state) => state.profilePage.status);
 
   if (!profile) {
     return <Loader />;
