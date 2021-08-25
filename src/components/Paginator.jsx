@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function Paginator({ curPage, totalUsers, pageSize }) {
   const pagesCount = Math.ceil(totalUsers / pageSize);
@@ -34,5 +35,11 @@ function Paginator({ curPage, totalUsers, pageSize }) {
     </div>
   );
 }
+
+Paginator.propTypes = {
+  curPage: PropTypes.number.isRequired,
+  totalUsers: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+};
 
 export default Paginator;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import './UploadAvatarButton.css';
 
 function UploadAvatarButton({ uploadAvatar }) {
@@ -25,5 +26,9 @@ function UploadAvatarButton({ uploadAvatar }) {
     </>
   );
 }
+
+UploadAvatarButton.propTypes = {
+  uploadAvatar: PropTypes.func.isRequired,
+};
 
 export default UploadAvatarButton;

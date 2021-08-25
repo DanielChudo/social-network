@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Post.css';
 
 function Post({ title, text }) {
@@ -14,5 +15,10 @@ function Post({ title, text }) {
     </div>
   );
 }
+
+Post.propTypes = {
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 
 export default Post;

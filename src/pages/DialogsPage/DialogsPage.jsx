@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import autosize from 'autosize';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 import { Dialog, Message } from '../../components';
 import { sendMessage } from '../../redux/dialogReducer';
 import './DialogsPage.css';
@@ -74,5 +75,12 @@ function SendMessageForm({ messageTextRef }) {
     </Formik>
   );
 }
+
+SendMessageForm.propTypes = {
+  messageTextRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(HTMLTextAreaElement) }),
+  ]).isRequired,
+};
 
 export default DialogsPage;

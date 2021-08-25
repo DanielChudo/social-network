@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import './ProfileStatus.css';
 
 function ProfileStatus({ status: propsStatus, isOwner, updateStatus }) {
@@ -21,7 +22,7 @@ function ProfileStatus({ status: propsStatus, isOwner, updateStatus }) {
       >
         {propsStatus || 'Напишите себе статус'}
       </p>
-      {editMode && isOwner && (
+      {isOwner && editMode && (
         <form
           id="profile__status-change"
           className="wrapper"
@@ -53,5 +54,11 @@ function ProfileStatus({ status: propsStatus, isOwner, updateStatus }) {
     </div>
   );
 }
+
+ProfileStatus.propTypes = {
+  status: PropTypes.string.isRequired,
+  isOwner: PropTypes.bool.isRequired,
+  updateStatus: PropTypes.func.isRequired,
+};
 
 export default ProfileStatus;

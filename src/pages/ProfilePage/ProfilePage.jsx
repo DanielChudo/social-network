@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import autosize from 'autosize';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 import defaultAvatar from '../../images/defaultAvatar.png';
 import {
   Post,
@@ -128,5 +129,12 @@ function AddPostForm({ postTextRef }) {
     </Formik>
   );
 }
+
+AddPostForm.propTypes = {
+  postTextRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(HTMLTextAreaElement) }),
+  ]).isRequired,
+};
 
 export default ProfilePage;

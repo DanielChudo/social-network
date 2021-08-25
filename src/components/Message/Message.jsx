@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import defaultAvatar from '../../images/defaultAvatar.png';
 import './Message.css';
 
@@ -14,5 +15,9 @@ function Message({ text }) {
     </div>
   );
 }
+
+Message.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 export default Message;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import defaultAvatar from '../../images/defaultAvatar.png';
 import './User.css';
 
@@ -52,5 +53,21 @@ function User({
     </div>
   );
 }
+
+User.defaultProps = {
+  avatar: '',
+  status: '',
+};
+
+User.propTypes = {
+  id: PropTypes.number.isRequired,
+  avatar: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  status: PropTypes.string,
+  followed: PropTypes.bool.isRequired,
+  followingInProgress: PropTypes.arrayOf(PropTypes.number).isRequired,
+  follow: PropTypes.func.isRequired,
+  unfollow: PropTypes.func.isRequired,
+};
 
 export default User;
