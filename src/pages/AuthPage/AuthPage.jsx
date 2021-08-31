@@ -31,7 +31,7 @@ function AuthPage() {
           .required('Введите почту'),
         password: Yup.string()
           .trim()
-          .min(6, 'Слишком короткий пароль')
+          .min(3, 'Слишком короткий пароль')
           .required('Введите пароль'),
         rememberMe: Yup.boolean(),
         captcha: Yup.string()
