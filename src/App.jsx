@@ -3,14 +3,14 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthPage, DialogsPage, ProfilePage, UsersPage } from './pages';
 import { Loader, NavBar } from './components';
-import { requestAuthUserData } from './redux/authReducer';
+import { getAuthUserData } from './redux/authReducer';
 import './App.css';
 
 function App() {
   const [ready, setReady] = useState(false);
   const dispatch = useDispatch();
   useEffect(async () => {
-    dispatch(requestAuthUserData(setReady));
+    dispatch(getAuthUserData(setReady));
   }, [dispatch]);
 
   const id = useSelector((state) => state.auth.id);

@@ -45,8 +45,8 @@ export function setCaptchaURL(captchaURL) {
   };
 }
 
-export const requestAuthUserData = (setReady) => async (dispatch) => {
-  const response = await authAPI.requestAuthUserData();
+export const getAuthUserData = (setReady) => async (dispatch) => {
+  const response = await authAPI.getAuthUserData();
   if (response.resultCode === 0) {
     const { id, email, login } = response.data;
     dispatch(setUserData(id, email, login, true));
@@ -65,7 +65,7 @@ export const login =
   (email, password, rememberMe, captcha, setStatus) => async (dispatch) => {
     const response = await authAPI.login(email, password, rememberMe, captcha);
     if (response.resultCode === 0) {
-      dispatch(requestAuthUserData());
+      dispatch(getAuthUserData());
     } else {
       if (response.resultCode === 10) {
         dispatch(getCaptchaUrl());

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import { User, Paginator, Loader } from '../../components';
-import { follow, requestUsers, unfollow } from '../../redux/usersReducer';
+import { follow, getUsers, unfollow } from '../../redux/usersReducer';
 import './UsersPage.css';
 
 function UsersPage() {
@@ -22,7 +22,7 @@ function UsersPage() {
   const curPage = Number(useParams().page);
   useEffect(() => {
     if (curPage) {
-      dispatch(requestUsers(curPage, pageSize, totalUsers));
+      dispatch(getUsers(curPage, pageSize, totalUsers));
     }
   }, [curPage]);
 

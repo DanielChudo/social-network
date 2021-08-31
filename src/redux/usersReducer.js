@@ -100,10 +100,10 @@ export function toggleFollowingInProgress(followingInProgress, userId) {
   };
 }
 
-export const requestUsers =
+export const getUsers =
   (pageNumber, pageSize, totalUsers) => async (dispatch) => {
     dispatch(toggleIsFetching(true));
-    const response = await usersAPI.requestUsers(pageNumber, pageSize);
+    const response = await usersAPI.getUsers(pageNumber, pageSize);
     dispatch(setUsers(response.items));
     if (totalUsers === 0) {
       dispatch(setTotalUsersCount(response.totalCount));
