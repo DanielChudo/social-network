@@ -6,7 +6,7 @@
 
 - Переписал все классовые компоненты на функциональные
 - Заменил все HOC (withRouter, connect) на более удобные хуки (useParams, useDispatch, useSelector). withAuthRedirect вообще был выкинут,
-  так как та же логика достигается через Switch и Redirect.
+  так как та же логика достигается через Switch и Redirect
 - Заменил устаревший Redux Form на Formik c Yup
 - Подключил ESLint + airbnb-config в связке с Prettier
 - Вместо бессмысленного авторского использования CSS Modules старался соблюдать БЭМ
